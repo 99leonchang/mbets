@@ -1,0 +1,121 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Site Properties -->
+    <title>McConnell Brue Macroeconomics Glossary</title>
+    <link rel="stylesheet" type="text/css" href="dist/semantic.css">
+
+    <script src="dist/jquery.min.js"></script>
+    <script src="dist/semantic.js"></script>
+    <script src="formattedterms.js"></script>
+
+    <style type="text/css">
+        body {
+            background-color: #FFFFFF;
+        }
+        .main.container {
+            padding-top: 3em;
+        }
+        .spaced .button {
+            margin-bottom: 0.75em;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            $('.ui.search')
+                    .search({
+                        source : content,
+                        fields: {
+                          title: 'title'
+                        },
+                        searchFields   : [
+                            'title', 'description'
+                        ],
+                        selectFirstResult : true,
+                        showNoResults : true,
+                        onSelect : display
+                        //searchFullText: false
+                    })
+            ;
+        });
+        function refer(term){
+
+            $('.ui.search')
+                    .search('set value', term)
+                    .search('query')
+            ;
+
+            //console.log($('.ui.search').search('get result', 'land'));
+        }
+        function parse_link(string){
+            var fullString = "", tempString = "";
+            var state = false;
+            for(var i = 0, len = string.length; i<len; i++){
+                if(string[i] == "_"){
+                    if(!state){
+                        state = true;
+                    }else{
+                        state = false;
+                        fullString += "<a onclick='refer(\"" + tempString + "\")'>" + tempString + "</a>";
+                        tempString = "";
+                    }
+                }else if(state){
+                    tempString += string[i];
+                }else if(!state){
+                    fullString += string[i];
+                }
+            }
+            return fullString;
+        }
+        function display(result,response){
+            console.log(result);
+            //var def = result.definition.replace(/[_](.*)[_]/g, "<a onclick='refer(\"$1\");'>$1</a>");
+
+            $('#definition_field').html("<div class=\"header\">"+ parse_link(result.title) +"</div><div class=\"description\">" + parse_link(result.definition) +"</div>");
+        }
+    </script>
+</head>
+<body>
+
+<div class="ui main container center aligned">
+    <div class="ui top attached segment">
+        <div class="ui large centered header">
+            <div class="content">McConnell Brue Macroeconomics Glossary</div>
+            <div class="sub header">Economic term search tool</div>
+        </div>
+        <br/>
+        <div class="ui grid stackable">
+            <div class="row">
+                <div class="four wide column">
+                    <div class="ui search">
+                        <div class="ui icon input">
+                            <input class="prompt" type="text" placeholder="Search term...">
+                            <i class="search icon"></i>
+                        </div>
+                        <div class="results"></div>
+                    </div>
+                </div>
+                <div class="twelve wide column">
+                    <div class="ui fluid card">
+                        <div class="content" id="definition_field">
+                            <div class="header">No Term Selected</div>
+                            <div class="description">Search for a term on the left for the definition</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui bottom attached segment">
+        <p>© 2016 <a href="http://99leonchang.com">Leon Chang</a></p>
+    </div>
+</div>
+
+</body>
+</html>
