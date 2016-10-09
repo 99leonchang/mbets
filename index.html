@@ -10,11 +10,6 @@
     <!-- Site Properties -->
     <title>McConnell Brue Macroeconomics Glossary</title>
     <link rel="stylesheet" type="text/css" href="dist/semantic.css">
-
-    <script src="dist/jquery.min.js"></script>
-    <script src="dist/semantic.js"></script>
-    <script src="formattedterms.js"></script>
-
     <style type="text/css">
         body {
             background-color: #FFFFFF;
@@ -26,6 +21,14 @@
             margin-bottom: 0.75em;
         }
     </style>
+
+    <!-- SEO Meta -->
+    <meta name="description" content="Searchable glossary of economic terms based off of the McConnell Brue Economics textbook.">
+    <meta name="keywords" content="McConnell, Brue, Economics, Glossary, Macroeconomics">
+
+    <script src="dist/jquery.min.js"></script>
+    <script src="dist/semantic.js"></script>
+    <script src="formattedterms.js"></script>
     <script>
         $(document).ready(function() {
             $('.ui.search')
@@ -111,6 +114,9 @@
                 </div>
             </div>
         </div>
+        <div class="ui horizontal divider">or</div>
+        <p>Search for multiple terms in one go using batch search.</p>
+        <a href="batchsearch.php" class="ui button basic green">Try it out</a>
     </div>
     <div class="ui bottom attached segment">
         <p>© 2016 <a href="http://99leonchang.com">Leon Chang</a></p>
