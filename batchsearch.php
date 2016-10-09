@@ -41,7 +41,7 @@ if(isset($_POST) != false){
     <script src="dist/jquery.min.js"></script>
     <script src="dist/semantic.js"></script>
     <script src="formattedterms.js"></script>
-
+   
 </head>
 <body>
 
@@ -73,9 +73,6 @@ if(isset($_POST) != false){
                                 </div>
                                 <div class="description">
                                     <?= $fuzzy_search->parse_link($single_def[2]) ?>
-                                </div>
-                                <div class="extra">
-                                    <div class="ui label">Limited</div>
                                 </div>
                             </div>
                         </div>
